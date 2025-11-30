@@ -20,6 +20,13 @@ if my_dataframe:
         og_dataset = session.table("smoothies.public.orders")
         edited_dataset = session.create_dataframe(editable_df)
 
+        
+# New section to display smoothiefroot nutrition information
+import requests
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+st.text(smoothiefroot_response.json())
+
+
         try:
             og_dataset.merge(edited_dataset,
                 [og_dataset['order_uid'] == edited_dataset['order_uid']],
