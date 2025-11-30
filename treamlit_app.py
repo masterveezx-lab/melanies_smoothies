@@ -2,10 +2,13 @@
 import streamlit as st
 from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col, when_matched
-
+cnx = st.connection("snowflake")
+session = cnx.session()
 # Write directly to the app
 st.title(":cup_with_straw: Pending Smoothie Orders :cup_with_straw:")
 st.write("Orders that need to be filled.")
+
+
 
 session = get_active_session()
 my_dataframe = session.table("smoothies.public.orders").filter(col("ORDER_FILLED") == False)
